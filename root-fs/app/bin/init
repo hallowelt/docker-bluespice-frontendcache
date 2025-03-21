@@ -1,0 +1,18 @@
+#!/bin/sh
+
+backendHost=${BACKEND_HOST:-"wiki-web"}
+backendPort=${BACKEND_PORT:-"9090"}
+
+echo '################################################################################'
+echo "Using backend host: ${backendHost}"
+echo "Using backend port: ${backendPort}"
+
+# Replace the placeholder in the VCL file
+sed -i "s/###BACKEND_HOST###/${backendHost}/g" /app/conf/default.vcl
+sed -i "s/###BACKEND_PORT###/${backendPort}/g" /app/conf/default.vcl
+
+varnishlog -a -w /dev/stdout -D
+
+export VARNISH_VCL_FILE=/app/conf/default.vcl
+# Use original entrypoint
+/usr/local/bin/docker-varnish-entrypoint "$@"

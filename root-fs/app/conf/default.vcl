@@ -1,8 +1,8 @@
 vcl 4.1;
 
 backend default {
-    .host = "wiki-web";
-    .port = "9090";
+    .host = "###BACKEND_HOST###";
+    .port = "###BACKEND_PORT###";
 }
 
 sub vcl_recv {

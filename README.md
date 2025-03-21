@@ -2,13 +2,13 @@
 
 This currently is just a regular Varnish server.
 
-ATTENTION: Currently this image is only meant to be used in a `bluespice-deploy` setup. The `wiki-web` service is hardcoded as a backend!
-
 In a `docker-compose.yml` it must be wired like this:
 ```yaml
   frontendcache:
 	image: bluespice/frontendcache:4.5
 	environment:
+		BACKEND_HOST: wiki-web
+		BACKEND_PORT: 9090
 		VIRTUAL_HOST: ${WIKI_HOST}
 		VIRTUAL_PORT: 80
 		VIRTUAL_PATH: /
@@ -30,18 +30,18 @@ HINT: We align the image tags with the version of BlueSpice that it is compatibl
 
 Example:
 ```sh
-docker tag bluespice/frontendcache:latest bluespice/frontendcache:4
-docker tag bluespice/frontendcache:latest bluespice/frontendcache:4.4
-docker tag bluespice/frontendcache:latest bluespice/frontendcache:4.4.1
+docker tag bluespice/frontendcache:latest bluespice/frontendcache:5
+docker tag bluespice/frontendcache:latest bluespice/frontendcache:5.0
+docker tag bluespice/frontendcache:latest bluespice/frontendcache:5.0.1
 ```
 
 ### Push the image to the registry
 Example:
 ```sh
 docker push bluespice/frontendcache:latest
-docker push bluespice/frontendcache:4
-docker push bluespice/frontendcache:4.4
-docker push bluespice/frontendcache:4.4.1
+docker push bluespice/frontendcache:5
+docker push bluespice/frontendcache:5.0
+docker push bluespice/frontendcache:5.0.1
 ```
 
 ## Testing
