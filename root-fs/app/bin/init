@@ -11,7 +11,7 @@ echo "Using backend port: ${backendPort}"
 sed -i "s/###BACKEND_HOST###/${backendHost}/g" /app/conf/default.vcl
 sed -i "s/###BACKEND_PORT###/${backendPort}/g" /app/conf/default.vcl
 
-varnishlog -a -w /dev/stdout -D
+varnishlog -a -A -w /dev/fd/1 &
 
 export VARNISH_VCL_FILE=/app/conf/default.vcl
 # Use original entrypoint

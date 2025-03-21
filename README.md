@@ -2,6 +2,11 @@
 
 This currently is just a regular Varnish server.
 
+# Environment variables
+- `BACKEND_HOST`: The hostname of the backend service
+- `BACKEND_PORT`: The port of the backend service
+
+#  Usage
 In a `docker-compose.yml` it must be wired like this:
 ```yaml
   frontendcache:
@@ -14,6 +19,8 @@ In a `docker-compose.yml` it must be wired like this:
 		VIRTUAL_PATH: /
 	tmpfs:
 		- /var/lib/varnish/varnishd:exec
+	depends_on:
+		- wiki-web
 ```
 
 Make sure to remove `VIRTUAL_HOST`, `VIRTUAL_PORT` and `VIRTUAL_PATH` from the `wiki-web` service!
