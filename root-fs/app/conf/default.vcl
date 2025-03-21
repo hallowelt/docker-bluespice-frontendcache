@@ -37,3 +37,15 @@ sub vcl_backend_response {
         set beresp.ttl = 30m;
     }
 }
+
+sub vcl_deliver {
+	# Add a header to indicate a cache hit
+	if (obj.hits > 0) {
+		set resp.http.X-Cache = "HIT";
+	} else {
+		set resp.http.X-Cache = "MISS";
+	}
+	unset resp.http.Via;
+	unset resp.http.X-Powered-By;
+	unset resp.http.X-Varnish;
+}
