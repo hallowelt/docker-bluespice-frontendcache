@@ -10,17 +10,17 @@ This currently is just a regular Varnish server.
 In a `docker-compose.yml` it must be wired like this:
 ```yaml
   frontendcache:
-	image: bluespice/frontendcache:4.5
-	environment:
-		BACKEND_HOST: wiki-web
-		BACKEND_PORT: 9090
-		VIRTUAL_HOST: ${WIKI_HOST}
-		VIRTUAL_PORT: 80
-		VIRTUAL_PATH: /
-	tmpfs:
-		- /var/lib/varnish/varnishd:exec
-	depends_on:
-		- wiki-web
+    image: bluespice/frontendcache:4.5
+    environment:
+      BACKEND_HOST: wiki-web
+      BACKEND_PORT: 9090
+      VIRTUAL_HOST: ${WIKI_HOST}
+      VIRTUAL_PORT: 80
+      VIRTUAL_PATH: /
+    tmpfs:
+      - /var/lib/varnish/varnishd:exec
+    depends_on:
+      - wiki-web
 ```
 
 Make sure to remove `VIRTUAL_HOST`, `VIRTUAL_PORT` and `VIRTUAL_PATH` from the `wiki-web` service!
