@@ -10,7 +10,7 @@ This currently is just a regular Varnish server.
 In a `docker-compose.yml` it must be wired like this:
 ```yaml
   frontendcache:
-    image: bluespice/frontendcache:4.5
+    image: bluespice/frontendcache:5
     environment:
       BACKEND_HOST: wiki-web
       BACKEND_PORT: 9090
@@ -29,7 +29,7 @@ Make sure to remove `VIRTUAL_HOST`, `VIRTUAL_PORT` and `VIRTUAL_PATH` from the `
 
 ### Build a new version of the image
 ```sh
-docker build -t bluespice/frontendcache:latest .
+docker build --no-cache --pull -t bluespice/frontendcache:latest .
 ```
 
 ### Apply proper tags
@@ -38,8 +38,8 @@ HINT: We align the image tags with the version of BlueSpice that it is compatibl
 Example:
 ```sh
 docker tag bluespice/frontendcache:latest bluespice/frontendcache:5
-docker tag bluespice/frontendcache:latest bluespice/frontendcache:5.0
-docker tag bluespice/frontendcache:latest bluespice/frontendcache:5.0.1
+docker tag bluespice/frontendcache:latest bluespice/frontendcache:5.2
+docker tag bluespice/frontendcache:latest bluespice/frontendcache:5.2.1
 ```
 
 ### Push the image to the registry
@@ -47,8 +47,8 @@ Example:
 ```sh
 docker push bluespice/frontendcache:latest
 docker push bluespice/frontendcache:5
-docker push bluespice/frontendcache:5.0
-docker push bluespice/frontendcache:5.0.1
+docker push bluespice/frontendcache:5.2
+docker push bluespice/frontendcache:5.2.1
 ```
 
 ## Testing
