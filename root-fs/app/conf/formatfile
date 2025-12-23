@@ -1,1 +1,0 @@
-%{X-Forwarded-for}i %l %u %t "%r" %s %b "%{Referer}i" "%{User-agent}i" %{Varnish:time_firstbyte}x %{Varnish:hitmiss}x %{Varnish:side}x

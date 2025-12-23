@@ -1,55 +1,9 @@
-# BlueSpice "Frontend-Cache" service
+<img alt="BlueSpice Logo" align="right" src="https://bluespice.com/wp-content/uploads/2022/09/bluespice_logo.png" />
 
-This currently is just a regular Varnish server.
+# `bluespice/frontendcache` service for BlueSpice
 
-# Environment variables
-- `BACKEND_HOST`: The hostname of the backend service
-- `BACKEND_PORT`: The port of the backend service
+This service is the frontendcache component. It provides static caching layer for BlueSpice.
 
-#  Usage
-In a `docker-compose.yml` it must be wired like this:
-```yaml
-  frontendcache:
-    image: bluespice/frontendcache:5
-    environment:
-      BACKEND_HOST: wiki-web
-      BACKEND_PORT: 9090
-      VIRTUAL_HOST: ${WIKI_HOST}
-      VIRTUAL_PORT: 80
-      VIRTUAL_PATH: /
-    tmpfs:
-      - /var/lib/varnish/varnishd:exec
-    depends_on:
-      - wiki-web
-```
+It is part of the [BlueSpice MediaWiki deployment stack](https://github.com/hallowelt/bluespice-deploy). Instructions on how to use it can be found on the [official helpdesk 📚](https://en.wiki.bluespice.com/wiki/Setup:Installation_Guide/Docker). For questions and support, please use the [contact form 🌐](https://bluespice.com/contact/) or visit the [community forums 💡](https://community.bluespice.com/).
 
-Make sure to remove `VIRTUAL_HOST`, `VIRTUAL_PORT` and `VIRTUAL_PATH` from the `wiki-web` service!
-
-## How to release a new version
-
-### Build a new version of the image
-```sh
-docker build --no-cache --pull -t bluespice/frontendcache:latest .
-```
-
-### Apply proper tags
-HINT: We align the image tags with the version of BlueSpice that it is compatible with.
-
-Example:
-```sh
-docker tag bluespice/frontendcache:latest bluespice/frontendcache:5
-docker tag bluespice/frontendcache:latest bluespice/frontendcache:5.2
-docker tag bluespice/frontendcache:latest bluespice/frontendcache:5.2.1
-```
-
-### Push the image to the registry
-Example:
-```sh
-docker push bluespice/frontendcache:latest
-docker push bluespice/frontendcache:5
-docker push bluespice/frontendcache:5.2
-docker push bluespice/frontendcache:5.2.1
-```
-
-## Testing
-Install `trivy` and run `trivy image bluespice/frontendcache` to check for vulnerabilities.
+The `main` branch of this repository is intentionally kept empty. Please refer to the specific version branches (e.g., `5.1.x`, `5.2.x`, etc.) for the relevant Dockerfiles and configurations corresponding to each BlueSpice version.
