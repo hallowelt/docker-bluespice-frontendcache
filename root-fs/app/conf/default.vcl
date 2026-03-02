@@ -38,6 +38,11 @@ sub vcl_recv {
         }
     }
 
+	# Force bypass of cache for requests containing 'PluggableAuthLogin' in the URL
+	if (req.url ~ "PluggableAuthLogin") {
+    return (pass);  # Prevent caching and forward the request directly
+	}
+
     # Pass requests from logged-in users directly.
     # Only detect cookies with "UserID" suffix in its name.
     # Cookie names containing "session" or "UserName" will also appear for _logged-out_ users,
