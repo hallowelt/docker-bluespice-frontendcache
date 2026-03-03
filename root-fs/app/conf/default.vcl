@@ -44,7 +44,7 @@ sub vcl_recv {
 	}
 
     # Bypass cache for requests to the token generation endpoint (for e.g wire and chat)
-    if (req.url ~ "/w/rest.php/mws/v1/user-token/generate") {
+    if (req.url ~ "rest.php/mws/v1/user-token/generate") {
         return (pass);  
     }
 
