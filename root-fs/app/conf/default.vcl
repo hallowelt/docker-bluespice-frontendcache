@@ -43,6 +43,11 @@ sub vcl_recv {
     return (pass);  # Prevent caching and forward the request directly
 	}
 
+    # Bypass cache for requests to the token generation endpoint (for e.g wire and chat)
+    if (req.url ~ "rest.php/mws/v1/user-token/generate") {
+        return (pass);  
+    }
+
     # Pass requests from logged-in users directly.
     # Only detect cookies with "UserID" suffix in its name.
     # Cookie names containing "session" or "UserName" will also appear for _logged-out_ users,
