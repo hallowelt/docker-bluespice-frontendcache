@@ -38,6 +38,15 @@ sub vcl_recv {
         }
     }
 
+   # Always cache requests matching these paths
+   if (
+       req.url ~ "/(skins|extensions)/.+\.(css|js|gif|jpg|jpeg|png|svg|woff|woff2|ttf|ico)$" ||
+       req.url ~ "/resources/(assets|lib|src)" ||
+       req.url ~ "load.php"
+   ) {
+       return (hash);
+   }
+
 	# Force bypass of cache for requests containing 'PluggableAuthLogin' in the URL
 	if (req.url ~ "PluggableAuthLogin") {
     return (pass);  # Prevent caching and forward the request directly
