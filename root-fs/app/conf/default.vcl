@@ -20,6 +20,11 @@ sub vcl_recv {
         return (pass);
     }
 
+	# Bypass cache for MediaWiki API token requests
+	if (req.url ~ "api\.php\?.*(meta=tokens|type=csrf|type=login)") {
+    	return (pass);
+	}
+
     # Serve objects up to 2 minutes past their expiry if the backend
     # is slow to respond.
     # set req.grace = 120s;
