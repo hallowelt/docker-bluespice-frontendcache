@@ -1,5 +1,7 @@
 vcl 4.1;
 
+import std;
+
 # Inspired by https://raw.githubusercontent.com/CanastaWiki/Canasta-DockerCompose/refs/heads/main/config/default.vcl
 
 backend default {
@@ -74,6 +76,9 @@ sub vcl_recv {
     if (req.http.Cache-Control ~ "no-cache") {
         ban(req.url);
     }
+
+    # Normalize query string to improve cache hit rate
+    set req.url = std.querysort(req.url);
 
     # normalize Accept-Encoding to reduce vary
     if (req.http.Accept-Encoding) {
