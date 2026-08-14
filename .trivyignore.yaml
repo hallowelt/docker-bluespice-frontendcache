@@ -1,3 +1,7 @@
 vulnerabilities:
   - id: CVE-2026-43185
-    statement: "https://en.wiki.bluespice.com/wiki/Security:Security_Advisories"
+    expired_at: 2026-09-30  
+    statement: "frontendcache is unreleased, ignore temporary"
+  - id: CVE-2026-13221
+    expired_at: 2026-09-30  
+    statement: "frontendcache is unreleased, ignore temporary"
